@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Paint JS</title>
+</head>
+<body>
+  <canvas class="jsCanvas canvas" width="500" height="700"></canvas> <!--HTML의 한 요소로 context를 갖는다.-->
+  <div class="controls">
+    <div class="controls__range range"> <!--context line width-->
+      <input type="range" class="range__jsRange" min="0.1" max="5" value="2.5" step="0.1" />
+    </div>
+    <div class="controls__btns button">
+      <button class="button__jsMode">Fill</button>
+      <button class="button__jsDEL">DEL</button>
+      <button class="button__jsSave">Save</button>
+    </div>
+    <div class="controls__colors">
+      <div class="controls__color jsColor" style="background-color: #333;"></div>
+      <div class="controls__color jsColor" style="background-color: #fff;"></div>
+      <div class="controls__color jsColor" style="background-color: #fe3629;"></div>
+      <div class="controls__color jsColor" style="background-color: #FE8B00;"></div>
+      <div class="controls__color jsColor" style="background-color: #FEC600;"></div>
+      <div class="controls__color jsColor" style="background-color: #44D558;"></div>
+      <div class="controls__color jsColor" style="background-color: #52C1FB;"></div>
+      <div class="controls__color jsColor" style="background-color: #006BF9"></div>
+      <div class="controls__color jsColor" style="background-color: #8040d4"></div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
