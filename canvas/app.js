@@ -1,9 +1,11 @@
 const canvas = document.querySelector(".jsCanvas");
 const colors = document.getElementsByClassName("jsColor");
 const range = document.querySelector(".range__jsRange");
-const mode = document.querySelector(".button__jsMode");
+const pen = document.querySelector(".range__jsPen");
+const eraser = document.querySelector(".range__jsEraser");
+const paint = document.querySelector(".range__jsPaint");
 const saveBtn = document.querySelector(".button__jsSave");
-const del = document.querySelector(".button__jsDEL");
+const clear = document.querySelector(".button__jsClear");
 
 const ctx = canvas.getContext("2d"); // context : 요소 안에서 픽셀에 접근할 수 있는 방법
 
@@ -62,16 +64,6 @@ function handleRangeChange(e) {
   ctx.lineWidth = size;
 }
 
-function handleModeClick() {
-  if (filling === true) {
-    filling = false;
-    mode.innerText = "Fill";
-  } else {
-    filling = true;
-    mode.innerText = "Paint";
-  }
-}
-
 function handleCanvasClick() {
   // handleModeClick()에서 filling이 true일 때 Paint가 되도록 한 상태.
   // 때문에 filling = true = handleCanvasClick() 작동
@@ -120,8 +112,6 @@ Array.from(colors).forEach(color => // color는 임의로 만든 변수명
 
 if (range) range.addEventListener("input", handleRangeChange);
 
-if (mode) mode.addEventListener("click", handleModeClick);
-
 if (saveBtn) saveBtn.addEventListener("click", handleSaveClick);
 
-if (del) del.addEventListener("click", deleteCanvas);
+if (clear) clear.addEventListener("click", deleteCanvas);
