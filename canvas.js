@@ -7,20 +7,15 @@ const paint = document.querySelector(".range__jsPaint");
 const saveBtn = document.querySelector(".button__jsSave");
 const clear = document.querySelector(".button__jsClear");
 
-const ctx = canvas.getContext("2d"); // context : 요소 안에서 픽셀에 접근할 수 있는 방법
-
-// canvas element must have two size
-// 1. CSS size
-// 2. manipulate the pixels size (실제 픽셀 사이즈~~)
-// canvas.width = 500; 
-// canvas.height = 700; >> html에서 지정해줬기 때문에 필요없다!
+const ctx = canvas.getContext("2d");
 
 const INITIAL_COLOR = "#2c2c2c";
 const CANVAS_WITH_SIZE = 500;
 const CANVAS_HEIGHT_SIZE = 700;
 
+// canvas setting
 ctx.fillStyle = "white";
-ctx.fillRect(0, 0, CANVAS_WITH_SIZE , CANVAS_HEIGHT_SIZE); // set defalt white background
+ctx.fillRect(0, 0, CANVAS_WITH_SIZE , CANVAS_HEIGHT_SIZE);
 ctx.lineWidth = 2.5;
 ctx.fillStyle = "";
 
@@ -40,7 +35,7 @@ function startPainting() {
   }
 }
 
-// when mouse moved on canvas
+// drawing
 function onMouseMove(e) {
   const x = e.offsetX; // offset : relative value with canvas
   const y = e.offsetY;
@@ -53,17 +48,20 @@ function onMouseMove(e) {
   }
 }
 
+// change color when click
 function handleColorClick(e) {
   const color = e.target.style.backgroundColor;
   ctx.strokeStyle = color;
   ctx.fillStyle = color;
 }
 
+// change range
 function handleRangeChange(e) {
   const size = e.target.value;
   ctx.lineWidth = size;
 }
 
+// paint canvas
 function handleCanvasClick() {
   // handleModeClick()에서 filling이 true일 때 Paint가 되도록 한 상태.
   // 때문에 filling = true = handleCanvasClick() 작동
@@ -91,9 +89,16 @@ function deleteCanvas(e) {
   ctx.beginPath();
 }
 
+function clickPaintBtn() {
+  if (filling === false) filling = true;
+  stopPainting();
+}
 
-
-
+function clickPenBtn() {
+  if (filling === true) filling = false;
+  alert("hi");
+  startPainting();
+}
 
 // mouse event 관리
 if (canvas) {
@@ -109,9 +114,8 @@ Array.from(colors).forEach(color => // color는 임의로 만든 변수명
   color.addEventListener("click", handleColorClick)
 );
 
-
+if (pen) paint.addEventListener("click", clickPenBtn);
+if (paint) paint.addEventListener("click", clickPaintBtn); 
 if (range) range.addEventListener("input", handleRangeChange);
-
 if (saveBtn) saveBtn.addEventListener("click", handleSaveClick);
-
 if (clear) clear.addEventListener("click", deleteCanvas);
