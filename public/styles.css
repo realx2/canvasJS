@@ -1,0 +1,25 @@
+@import "reset.css";
+
+body {
+  padding: 3% 5%;
+  box-sizing: border-box;
+
+  background-color: rgb(240, 240, 240);
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 2fr 8fr;
+  position: relative;
+  
+  height: 87vh;
+
+  border: 1px solid rgb(225, 225, 225);
+  background-color: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.055);
+}
+
+/* ============================ left-wrap */
+.left-menu {
+  border-right: 1px solid rgb(240, 240, 240);
+}

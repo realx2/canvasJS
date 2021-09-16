@@ -17,33 +17,30 @@ const CANVAS_HEIGHT_SIZE = 700;
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, CANVAS_WITH_SIZE , CANVAS_HEIGHT_SIZE);
 ctx.lineWidth = 2.5;
-ctx.fillStyle = "";
+ctx.fillStyle = "#2c2c2c";
 
 let painting = false;
 let filling = false; // filling mode인지 아닌지 구분
 
 
 
-function stopPainting(e) {
+function stopPainting() {
   painting = false;
 }
 
-
 function startPainting() {
-  if (filling === false) {
-    painting = true;
-  }
+  painting = true;
 }
 
 // drawing
 function onMouseMove(e) {
-  const x = e.offsetX; // offset : relative value with canvas
+  const x = e.offsetX;
   const y = e.offsetY;
   if (!painting) {
-    ctx.beginPath(); // beginPath() : 경로 생성, 마우스는 계속 움직이면서 path를 만든다.
-    ctx.moveTo(x, y); // moveTo() : start line, 마우스가 멈춘 곳이 시작점
+    ctx.beginPath();
+    ctx.moveTo(x, y); 
   } else {
-    ctx.lineTo(x, y); // lineTo() : end line, 마우스를 움직이는 내내 move event가 발생한다.
+    ctx.lineTo(x, y); // painting = true
     ctx.stroke();
   }
 }
@@ -63,8 +60,6 @@ function handleRangeChange(e) {
 
 // paint canvas
 function handleCanvasClick() {
-  // handleModeClick()에서 filling이 true일 때 Paint가 되도록 한 상태.
-  // 때문에 filling = true = handleCanvasClick() 작동
   if (filling) {
     ctx.fillRect(0, 0, CANVAS_WITH_SIZE , CANVAS_HEIGHT_SIZE);
   }
@@ -89,15 +84,12 @@ function deleteCanvas(e) {
   ctx.beginPath();
 }
 
-function clickPaintBtn() {
-  if (filling === false) filling = true;
-  stopPainting();
+function fillingBtn() {
+  filling = true;
 }
 
-function clickPenBtn() {
-  if (filling === true) filling = false;
-  alert("hi");
-  startPainting();
+function paintingBtn(e) {
+  filling = false;
 }
 
 // mouse event 관리
@@ -114,8 +106,8 @@ Array.from(colors).forEach(color => // color는 임의로 만든 변수명
   color.addEventListener("click", handleColorClick)
 );
 
-if (pen) paint.addEventListener("click", clickPenBtn);
-if (paint) paint.addEventListener("click", clickPaintBtn); 
+if (pen) paint.addEventListener("click", paintingBtn);
+if (paint) paint.addEventListener("click", fillingBtn); 
 if (range) range.addEventListener("input", handleRangeChange);
 if (saveBtn) saveBtn.addEventListener("click", handleSaveClick);
 if (clear) clear.addEventListener("click", deleteCanvas);
