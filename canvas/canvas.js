@@ -92,6 +92,10 @@ function paintingBtn(e) {
   filling = false;
 }
 
+function eraserBtn() {
+  
+}
+
 // mouse event 관리
 if (canvas) {
   canvas.addEventListener("mousemove", onMouseMove);
@@ -106,6 +110,7 @@ Array.from(colors).forEach(color => // color는 임의로 만든 변수명
   color.addEventListener("click", handleColorClick)
 );
 
+if (eraser) eraser.addEventListener("click", eraserBtn)
 if (pen) paint.addEventListener("click", paintingBtn);
 if (paint) paint.addEventListener("click", fillingBtn); 
 if (range) range.addEventListener("input", handleRangeChange);
