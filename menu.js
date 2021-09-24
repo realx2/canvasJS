@@ -1,9 +1,18 @@
 const menu = document.querySelector(".menu__icon");
-const colors = document.querySelector(".controls-colors");
+const colorPalete = document.querySelector(".controls-colors");
+
 
 function activeMenu() {
-  const actionMenu = menu.classList.add("active-menu");
-  if (actionMenu) 
-}
+  if (menu.value === 'open') {
+    menu.style['transform'] = "rotate(360deg)";
+    colorPalete.style['transform'] = "translateY(68%)";
+    colorPalete.style['opacity'] = "1";
 
-if (menu) menu.addEventListener("click", activeMenu);
+    menu.value = 'close';
+  } else {
+    menu.style['transform'] = "rotate(-360deg)";
+    colorPalete.style['transform'] = "translateY(-20%)";
+    colorPalete.style['opacity'] = "0";
+    menu.value = 'open'
+  }
+}
