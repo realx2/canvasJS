@@ -98,8 +98,9 @@ body {
   border: 1px solid rgb(235, 235, 235);
   border-radius: .3em;
   box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
 }
-.range__jsRange { 
+.jsRange { 
   width: 160px;
   margin-left: 50px; 
 }
