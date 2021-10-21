@@ -100,7 +100,7 @@ body {
   box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.05);
   cursor: pointer;
 }
-.jsRange { 
+.tools__range { 
   width: 160px;
   margin-left: 50px; 
 }
