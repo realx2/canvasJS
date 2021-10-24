@@ -16,18 +16,20 @@ ctx.fillRect(0, 0, CANVAS_WEIGHT, CANVAS_HEIGHT);
 ctx.lineWidth = 2.5;
 ctx.fillStyle = "#2c2c2c";
 
-// painting default = false
+// default = false
 let painting,
     filling,
     erasing = false;
 
 
-function startPainting() {
+function startPainting() { 
   painting = true;
+  erasing = true;
 }
 
 function stopPainting() {
   painting = false;
+  erasing = false;
 }
 
 /* drawing stroke */
@@ -40,30 +42,39 @@ function onMouseMove(e) {
     ctx.stroke();
   } else {
     ctx.beginPath();
-    ctx.moveTo(x, y); // 그려지지 않는 동안 path를 만들며 따라감
+    ctx.moveTo(x, y); // 마우스를 따라간 곳이 시작점
   }
 }
 
 // choose color = drawing color
 function clickColor(e) {
   const color = e.target.style.backgroundColor;
-  ctx.strokStyle = color;
+  ctx.strokeStyle = color;
   ctx.fillStyle = color;
 }
 /* choose color 
  배열에 담아 forEach() 돌려줌 */
-Array.from(colors).forEach(targetColor => {
+colors.forEach((targetColor) => {
   targetColor.addEventListener("click", clickColor);
 })
 
+// fill canvas
+function handleCanvasClick(e) {
+  if (filling) ctx.fillRect(0, 0, CANVAS_WEIGHT, CANVAS_HEIGHT);
+  painting = false;
+}
+
+// handle range
+function handleRange(e) {
+  const rangeSize = e.target.value;
+  ctx.lineWidth = rangeSize;
+}
 
 function clickPenBtn() {
-  startPainting();
   filling = false;
 }
 
 function clickPaintBtn() {
-  stopPainting();
   filling = true;
 }
 
@@ -75,10 +86,7 @@ function clickEraserBtn() {
 
 
 
-// handle range
-function handleRange() {
-  
-}
+
 
 
 
@@ -96,8 +104,10 @@ if (canvas) {
   canvas.addEventListener("mousedown", startPainting);
   canvas.addEventListener("mouseup", stopPainting);
   canvas.addEventListener("mouseleave", stopPainting);
+  canvas.addEventListener("click", handleCanvasClick);
 }
 
 if (penBtn) penBtn.addEventListener("click", clickPenBtn);
 if (paintBtn) paintBtn.addEventListener("click", clickPaintBtn);
+if (eraserBtn) eraserBtn.addEventListener("click", clickEraserBtn);
 if (range) range.addEventListener("input", handleRange);
