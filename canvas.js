@@ -4,6 +4,7 @@ const eraserBtn = document.querySelector(".jsEraser");
 const paintBtn = document.querySelector(".jsPaint");
 const range = document.querySelector(".jsRange");
 const colors = document.querySelectorAll(".jsColor");
+const clearBtn = document.que
 
 const ctx = canvas.getContext('2d');
 
@@ -46,6 +47,11 @@ function onMouseMove(e) {
   }
 }
 
+const drawColor = color => {
+  ctx.strokeStyle = color;
+  ctx.globalCompositeOperation = 'source-over';
+}
+
 // choose color = drawing color
 function clickColor(e) {
   const color = e.target.style.backgroundColor;
@@ -57,12 +63,6 @@ function clickColor(e) {
 colors.forEach((targetColor) => {
   targetColor.addEventListener("click", clickColor);
 })
-
-// fill canvas
-function handleCanvasClick(e) {
-  if (filling) ctx.fillRect(0, 0, CANVAS_WEIGHT, CANVAS_HEIGHT);
-  painting = false;
-}
 
 // handle range
 function handleRange(e) {
@@ -78,10 +78,14 @@ function clickPaintBtn() {
   filling = true;
 }
 
+// fill canvas
+function handleCanvasClick(e) {
+  if (filling) ctx.fillRect(0, 0, CANVAS_WEIGHT, CANVAS_HEIGHT);
+}
+
 function clickEraserBtn() {
-  painting = false;
-  filling = false;
-  erasing = true;
+  ctx.globalCompositeOperation = 'destination-out';
+  ctx.strokeStyle = "rgb(255, 255, 255)";
 }
 
 
@@ -111,3 +115,4 @@ if (penBtn) penBtn.addEventListener("click", clickPenBtn);
 if (paintBtn) paintBtn.addEventListener("click", clickPaintBtn);
 if (eraserBtn) eraserBtn.addEventListener("click", clickEraserBtn);
 if (range) range.addEventListener("input", handleRange);
+if (clear) clear.
