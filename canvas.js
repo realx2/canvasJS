@@ -100,15 +100,6 @@ function clickSaveBtn() {
   link.click();
 }
 
-// ctx.strokeStyle = color;
-// ctx.globalCompositeOperation = 'source-over';
-
-
-
-
-
-
-
 
 /* 1. 마우스가 돌아다닐 때
   2. 마우스가 클릭 될 때
