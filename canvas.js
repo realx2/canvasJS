@@ -3,8 +3,9 @@ const penBtn = document.querySelector(".jsPen");
 const eraserBtn = document.querySelector(".jsEraser");
 const paintBtn = document.querySelector(".jsPaint");
 const range = document.querySelector(".jsRange");
+const clearBtn = document.querySelector(".jsClear");
+const saveBtn = document.querySelector(".jsSave");
 const colors = document.querySelectorAll(".jsColor");
-const clearBtn = document.que
 
 const ctx = canvas.getContext('2d');
 
@@ -47,11 +48,6 @@ function onMouseMove(e) {
   }
 }
 
-const drawColor = color => {
-  ctx.strokeStyle = color;
-  ctx.globalCompositeOperation = 'source-over';
-}
-
 // choose color = drawing color
 function clickColor(e) {
   const color = e.target.style.backgroundColor;
@@ -71,26 +67,41 @@ function handleRange(e) {
 }
 
 function clickPenBtn() {
+  ctx.globalCompositeOperation = 'source-over';
   filling = false;
 }
 
 function clickPaintBtn() {
+  ctx.globalCompositeOperation = 'source-over';
   filling = true;
 }
 
 // fill canvas
 function handleCanvasClick(e) {
-  if (filling) ctx.fillRect(0, 0, CANVAS_WEIGHT, CANVAS_HEIGHT);
+  if (filling) ctx.fillRect(0, 0, CANVAS_HEIGHT, CANVAS_HEIGHT);
 }
+
 
 function clickEraserBtn() {
   ctx.globalCompositeOperation = 'destination-out';
   ctx.strokeStyle = "rgb(255, 255, 255)";
 }
 
+function clickClearBtn() {
+  ctx.clearRect(0, 0, CANVAS_WEIGHT, CANVAS_WEIGHT);
+  ctx.beginPath();
+}
 
+function clickSaveBtn() {
+  const img = canvas.toDataURL();
+  const link = document.createElement("a"); // a: anchar (href link같은거)
+  link.href = img;
+  link.download = "canvas image";
+  link.click();
+}
 
-
+// ctx.strokeStyle = color;
+// ctx.globalCompositeOperation = 'source-over';
 
 
 
@@ -114,5 +125,6 @@ if (canvas) {
 if (penBtn) penBtn.addEventListener("click", clickPenBtn);
 if (paintBtn) paintBtn.addEventListener("click", clickPaintBtn);
 if (eraserBtn) eraserBtn.addEventListener("click", clickEraserBtn);
+if (clearBtn) clearBtn.addEventListener("click", clickClearBtn);
+if (saveBtn) saveBtn.addEventListener("click", clickSaveBtn);
 if (range) range.addEventListener("input", handleRange);
-if (clear) clear.
