@@ -9,8 +9,8 @@ const colors = document.querySelectorAll(".jsColor");
 
 const ctx = canvas.getContext('2d');
 
-const CANVAS_WEIGHT = 500;
-const CANVAS_HEIGHT = 700;
+const CANVAS_WEIGHT = `60 + vh`;
+const CANVAS_HEIGHT = `90 + %`;
 
 // canvas setting
 ctx.fillStyle = "#fff";
